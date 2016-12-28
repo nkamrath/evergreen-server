@@ -10,6 +10,21 @@
 	                	<form action="" method="post" enctype="multipart/form-data">
 	    					<button class = "btn btn-success" name="command" value="{{light.ipAddress}},light on">Light On</button>
 	    					<button class = "btn btn-info" name="command" value="{{light.ipAddress}},light auto">Light Auto</button>
+
+	    					<div class="btn-group">
+							  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    Auto Time <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu">
+							  	<li><button class = "btn btn-default" name="command" value="{{light.ipAddress}},light auto-time 10">10 seconds</button></li>
+							  	<li><button class = "btn btn-default" name="command" value="{{light.ipAddress}},light auto-time 20">20 seconds</button></li>
+							    <li><button class = "btn btn-default" name="command" value="{{light.ipAddress}},light auto-time 30">30 seconds</button></li>
+							    <li><button class = "btn btn-default" name="command" value="{{light.ipAddress}},light auto-time 60">1 minute</button></li>
+							    <li><button class = "btn btn-default" name="command" value="{{light.ipAddress}},light auto-time 120">2 minutes</button></li>
+							    <li><button class = "btn btn-default" name="command" value="{{light.ipAddress}},light auto-time 300">5 minutes</button></li>
+							  </ul>
+							</div>
+
 	    					<button class = "btn btn-danger" name="command" value="{{light.ipAddress}},light off">Light Off</button>
 	    					{% csrf_token %}
 						</form>
