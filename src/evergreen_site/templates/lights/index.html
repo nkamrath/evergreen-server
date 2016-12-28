@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block body_block %}
+
+Lights Home<br>
+
+{% if lights %}
+            <ul>
+                {% for light in lights %}
+                	<li>{{ light.name }}</li>
+	                	<form action="" method="post" enctype="multipart/form-data">
+	    					<button name="command" value="{{light.ipAddress}},light on">Light On</button>
+	    					<button name="command" value="{{light.ipAddress}},light off">Light Off</button>
+	    					<button name="command" value="{{light.ipAddress}},light auto">Light Auto</button>
+	    					{% csrf_token %}
+						</form>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>There are no lights on the network.</strong>
+        {% endif %}
+
+{% endblock %}
