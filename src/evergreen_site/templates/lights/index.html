@@ -8,12 +8,12 @@
                 {% for light in lights %}
                 	<li>{{ light.name }}</li>
 	                	<form action="" method="post" enctype="multipart/form-data">
-	    					<button class = "btn btn-success" name="command" value="{{light.ipAddress}},light on">Light On</button>
-	    					<button class = "btn btn-info" name="command" value="{{light.ipAddress}},light auto">Light Auto</button>
+	    					<button class = "btn btn-success" name="command" value="{{light.ipAddress}},light on">On</button>
+	    					<button class = "btn btn-info" name="command" value="{{light.ipAddress}},light auto">Auto</button>
 
 	    					<div class="btn-group">
 							  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							    Auto Time <span class="caret"></span>
+							    Timer <span class="caret"></span>
 							  </button>
 							  <ul class="dropdown-menu">
 							  	<li><button class = "btn btn-default" name="command" value="{{light.ipAddress}},light auto-time 10">10 seconds</button></li>
@@ -25,7 +25,7 @@
 							  </ul>
 							</div>
 
-	    					<button class = "btn btn-danger" name="command" value="{{light.ipAddress}},light off">Light Off</button>
+	    					<button class = "btn btn-danger" name="command" value="{{light.ipAddress}},light off">Off</button>
 	    					{% csrf_token %}
 						</form>
                 {% endfor %}
