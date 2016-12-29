@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 {% block body_block %}
 
-<h1>Lights Home</h1>
+<h1><span class="glyphicon glyphicon-flash" aria-hidden="true"></span>Lights Home</h1>
 
 {% if lights %}
             <ul>
                 {% for light in lights %}
-                	<li>{{ light.name }}</li>
+                	<div class="well">
+                	<button class = "btn btn-default" name="command">{{light.name}}</button>
+                	<br><br>
 	                	<form action="" method="post" enctype="multipart/form-data">
 	    					<button class = "btn btn-success" name="command" value="{{light.ipAddress}},light on">On</button>
 	    					<button class = "btn btn-info" name="command" value="{{light.ipAddress}},light auto">Auto</button>
@@ -29,7 +31,7 @@
 	    					{% csrf_token %}
 						</form>
                 {% endfor %}
-            </ul>
+            </div>
         {% else %}
             <strong>There are no lights on the network.</strong>
         {% endif %}
