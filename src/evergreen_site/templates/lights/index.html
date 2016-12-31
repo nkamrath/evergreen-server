@@ -1,37 +1,57 @@
 {% extends 'base.html' %}
 {% block body_block %}
+{% csrf_token %}
+
+<script type="text/javascript">
+
+function postFunction(commandString){
+	$.post("/lights/commandpost/",
+		{
+			command:commandString,
+			csrfmiddlewaretoken: '{{csrf_token}}' 
+		}
+		//below is for callback after ajax completes if necessary
+		// function(data, status){
+		// 	alert("Data: " + data + "\nStatus: " + status);
+		// }
+		);
+}
+
+</script>
 
 <h1><span class="glyphicon glyphicon-flash" aria-hidden="true"></span>Lights Home</h1>
 
 {% if lights %}
-            <ul>
+            
+            	<!-- <form id="lights_form" method="post" enctype="multipart/form-data"> -->
                 {% for light in lights %}
                 	<div class="well">
-                	<button class = "btn btn-default" name="command">{{light.name}}</button>
+                	<button class = "btn btn-default" name="command" onclick="location.href='/lights/info/{{light.ip_address}}'">{{light.name}}</button>
                 	<br><br>
-	                	<form action="" method="post" enctype="multipart/form-data">
-	    					<button class = "btn btn-success" name="command" value="{{light.ipAddress}},light on">On</button>
-	    					<button class = "btn btn-info" name="command" value="{{light.ipAddress}},light auto">Auto</button>
+	                	
+	    					<button class = "btn btn-success" name="command" onclick="postFunction('{{light.ip_address}},light on')">On</button>
+	    					<button class = "btn btn-info" name="command" onclick="postFunction('{{light.ip_address}},light auto')">Auto</button>
 
 	    					<div class="btn-group">
 							  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							    Timer <span class="caret"></span>
 							  </button>
 							  <ul class="dropdown-menu">
-							  	<li><button class = "btn btn-default" name="command" value="{{light.ipAddress}},light auto-time 10">10 seconds</button></li>
-							  	<li><button class = "btn btn-default" name="command" value="{{light.ipAddress}},light auto-time 20">20 seconds</button></li>
-							    <li><button class = "btn btn-default" name="command" value="{{light.ipAddress}},light auto-time 30">30 seconds</button></li>
-							    <li><button class = "btn btn-default" name="command" value="{{light.ipAddress}},light auto-time 60">1 minute</button></li>
-							    <li><button class = "btn btn-default" name="command" value="{{light.ipAddress}},light auto-time 120">2 minutes</button></li>
-							    <li><button class = "btn btn-default" name="command" value="{{light.ipAddress}},light auto-time 300">5 minutes</button></li>
+							  	<li><button class = "btn btn-default" name="command" onclick="postFunction('{{light.ip_address}},light auto-time 10')">10 seconds</button></li>
+							  	<li><button class = "btn btn-default" name="command" onclick="postFunction('{{light.ip_address}},light auto-time 20')">20 seconds</button></li>
+							    <li><button class = "btn btn-default" name="command" onclick="postFunction('{{light.ip_address}},light auto-time 30')">30 seconds</button></li>
+							    <li><button class = "btn btn-default" name="command" onclick="postFunction('{{light.ip_address}},light auto-time 60')">1 minute</button></li>
+							    <li><button class = "btn btn-default" name="command" onclick="postFunction('{{light.ip_address}},light auto-time 120')">2 minutes</button></li>
+							    <li><button class = "btn btn-default" name="command" onclick="postFunction('{{light.ip_address}},light auto-time 300')">5 minutes</button></li>
 							  </ul>
 							</div>
 
-	    					<button class = "btn btn-danger" name="command" value="{{light.ipAddress}},light off">Off</button>
+	    					<button class = "btn btn-danger" name="command" onclick="postFunction('{{light.ip_address}},light off')">Off</button>
 	    					{% csrf_token %}
-						</form>
+					</div>
                 {% endfor %}
-            </div>
+                <!-- </form> -->
+            
         {% else %}
             <strong>There are no lights on the network.</strong>
         {% endif %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block body_block %}
+{% csrf_token %}
+
+Light ip: {{light_info.ipAddress}}
+	
+	<form id="category_form" enctype="multipart/form-data" method="post" action="/lights/info/{{light_info.ip_address}}/">
+	{% csrf_token %}
+	{% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+                <br>
+   	{% endfor %}
+   	<input type="submit" name="submit" value="Update Light" />
+   	</form>
+
+{% endblock %}

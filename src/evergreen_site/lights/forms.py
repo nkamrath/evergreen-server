@@ -1,8 +1,10 @@
 from django import forms
+from lights.models import Light
 
-class LightsForm(forms.Form):
-	name = forms.CharField(max_length=64)
-	ipAddress = forms.Charfield(max_length=20)
-	currentState = forms.CharField(max_length=10)
-	autoOffTimeSeconds = forms.CharField(max_length=10)
-	lastBeaconTime = forms.DateField()
+class LightForm(forms.ModelForm):
+	name = forms.CharField(max_length=64, help_text='Name: ')
+	ip_address = forms.CharField(max_length=20, help_text='IP Address: ')
+
+	class Meta:
+		model = Light
+		fields = ('ip_address', 'name') #these are the fields of light form
