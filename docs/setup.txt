@@ -1,0 +1,49 @@
+EVERGREEN SERVER SETUP
+
+These are the instructions for setting up a dev environment as well as a run environment for the maze server.
+
+==== INSTALL MYSQL SERVER ====
+MySQL server is required as it is the database behind the server.  Run:
+$sudo apt-get install mysql-server
+
+==== INSTALL DJANGO PYTHON AND PYTHON TOOLS ====
+Django is the web framework for the web management and web site portal.  Run:
+$sudo apt-get install python-django python-pip python-dev libmysqlclient-dev
+need django-registration-redux for django auth app/pages
+$sudo pip install django-registration-redux
+$sudo pip install pymysql
+$sudo pip install Pillow
+
+==== INSTALL MYSQL CONNECTION FOR PYTHON ====
+Python scripts are used to interact with the data base.  To install mysql python libraries Run:
+$sudo pip install MySQL-python
+
+==== INSTALLING MYSQL CONNECTION FOR C++ ====
+C++ based server engine that facilitates all other  server back end functions besides the web site needs mysql connection.
+$sudo apt-get install libmysqlcppconn-dev
+
+
+==== SETTING UP THE DATABASE FOR DJANGO ====
+Django is configured to use the Mysql database for storage, but the MySQL server must be configured correctly.  Run
+$mysql -u root -p
+Create a databse for the maze django app
+$CREATE DATABASE maze_database CHARACTER SET UTF8;
+Then create user and grant privileges as follows:
+$CREATE USER maze@localhost IDENTIFIED BY 'nellie';
+GRANT ALL PRIVILEGES ON maze_database.* to maze@localhost;
+FLUSH PRIVILEGES;
+exit
+
+==== MAKING INITIAL MIGRATIONS ====
+Django will require some database setup of migrations.  In maze_site Run:
+$python manage.py makemigrations 
+$python manage.py migrate
+
+==== SETTING UP DJANGO SUPERUSER ====
+Creating a super user in django is always a good idea.  Run
+$python manage.py createsuperuser
+fill in requested details
+
+
+At this point you should be able to run the django server.  Run djang server Run:
+python manage.py runserver
