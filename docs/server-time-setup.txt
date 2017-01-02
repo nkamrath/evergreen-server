@@ -1,0 +1,7 @@
+time correction notes ubuntu server command line
+
+need to set "USE_TZ = True" in settings.py in django project
+
+$sudo apt-get install ntpdate
+$sudo ntpdate pool.ntp.org
+$sudo dpkg-reconfigure tzdata
