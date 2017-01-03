@@ -15,6 +15,12 @@ function postFunction(commandString){
 		// 	alert("Data: " + data + "\nStatus: " + status);
 		// }
 		);
+
+	setTimeout(refresh, 1200);
+}
+
+function refresh(){
+	window.location.href = '/lights/';
 }
 
 </script>
@@ -41,6 +47,12 @@ function postFunction(commandString){
   display: table;
   display: inline-block;
 }
+
+.custom-inline{
+	  display: table;
+  display: inline-block;
+}
+
 </style>
 
 <div class="page-header">
@@ -51,8 +63,8 @@ function postFunction(commandString){
             
             	<!-- <form id="lights_form" method="post" enctype="multipart/form-data"> -->
                 {% for light in lights %}
-                	<div class="well well-sm">
-                	<h2>{{light.name}}
+                	<div class="well well-sm custom-inline">
+                	<h3>{{light.name}}
           			{% if light.current_state == True %}
 	                	<div class = "led-on"></div>
 					{% else %}
@@ -63,7 +75,7 @@ function postFunction(commandString){
 					{% else %}
 						<span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
 					{% endif %}
-                	</h2>
+                	</h3>
     					<button class = "btn btn-success" name="command" onclick="postFunction('{{light.ip_address}},light on')">On</button>
     					<button class = "btn btn-info" name="command" onclick="postFunction('{{light.ip_address}},light auto')">Auto</button>
 
@@ -91,5 +103,5 @@ function postFunction(commandString){
         {% else %}
             <strong>There are no lights on the network.</strong>
         {% endif %}
-
+<br>
 {% endblock %}

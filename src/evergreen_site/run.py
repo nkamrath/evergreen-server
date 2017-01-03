@@ -29,7 +29,7 @@ def start_beacon_handler():
 
 def start_django_server():
 	print "starting djanog server"
-	return subprocess.Popen(["python", "manage.py", "runserver"], shell=False)
+	return subprocess.Popen(["python", "manage.py", "runserver", "0.0.0.0:80"], shell=False)
 
 
 if __name__ == '__main__':
